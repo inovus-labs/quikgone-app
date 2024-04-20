@@ -206,13 +206,13 @@ export default {
             ],
         };
     },
-    mounted() {
-        if (document.cookie.includes('token')) {
-            this.$router.push('/');
-        }
-    },
+    // mounted() {
+    //     if (document.cookie.includes('token')) {
+    //         this.$router.push('/');
+    //     }
+    // },
     methods: {
-        async userRegister() {
+         async userRegister() {
             let user = {
                 "first_name": this.firstName,
                 "last_name": this.lastName,
@@ -221,19 +221,22 @@ export default {
                 "password": this.password,
                 "dob": this.dob,
                 "gender": this.gender,
-                "gst": this.gst,
-                "shopName": this.shopName
+                // "gst": this.gst,
+                // "shopName": this.shopName
             }
 
             await userRegister(user).then((response) => {
-                if (response.status === 200) {
-                    this.$router.push('/login');
-                } else {
-                    this.error = response.error;
-                }
-            }).catch((error) => {
-                this.error = error;
-            });
+                   if (response.status === 200) {
+                        this.$router.push('/login');
+                        console.log(response);
+                    } else {
+                        this.error = response.error;
+                        console.log(response);
+                    }
+                }).catch((error) => {
+                    this.error = error;
+                    console.log(error);
+                });
         },
     },
     watch: {
