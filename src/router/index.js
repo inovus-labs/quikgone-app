@@ -4,6 +4,7 @@ import login from '@/views/Login.vue'
 import signup from '@/views/SignUp.vue'
 import Productpage from '@/views/Productpage.vue'
 import AddProject from '@/views/AddProject.vue'
+import CartView from '@/views/CartView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,7 +32,7 @@ const router = createRouter({
         title: 'signup',
       },
     },{
-      path: '/AddProject',
+      path: '/addProject',
       name: 'AddProject',
       component: AddProject,
       meta: {
@@ -39,7 +40,15 @@ const router = createRouter({
       },
     },
     {
-      path: '/Productpage',
+      path: '/cartview',
+      name: 'CartView',
+      component: CartView,
+      meta: {
+        title: 'CartView',
+      },
+    },
+    {
+      path: '/productpage',
       name: 'Productpage',
       component: Productpage,
       meta: {

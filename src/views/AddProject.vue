@@ -29,10 +29,11 @@
           </div>
           <div class="md:col-span-2">
             <label for="image" class="block mb-2 font-semibold text-gray-700">Product Image</label>
-            <input type="file" id="image" @change="handleImageUpload" required class=" pr-28 border border-gray-300 rounded-xxl focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="file" id="image" @change="handleImageUpload" class=" pr-28 border border-gray-300 rounded-xxl focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
+          <p v-if="messege" class="text-center text-red-500 mb-4 text-sm" >{{messege}}</p>
           <div class="md:col-span-2 flex justify-center">
-            <button type="submit" class="bg-primary2 hover:bg-primary text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-300 ease-in-out">Add Product</button>
+            <button type="submit"   class="bg-primary2 hover:bg-primary text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-300 ease-in-out">Add Product</button>
           </div>
         </form>
       </div>
@@ -40,6 +41,8 @@
   </template>
   
   <script>
+    import { AddItem } from '@/API/index.js'
+
   export default {
     data() {
       return {
@@ -51,14 +54,36 @@
           seller_id: '',
           expiry_date: '',
           image: null
-        }
+        },
+        messege: null
       }
     },
     methods: {
-      addProduct() {
-        // Here, you can write the code to send the newProduct data to your server or perform any other necessary actions.
-        console.log(this.newProduct);
-        // Reset the form after submission
+      
+      async addProduct() {
+        await AddItem({
+            product_name: this.newProduct.product_name,
+            product_qty: this.newProduct.product_qty,
+            product_owner: this.newProduct.product_owner,
+            product_category: this.newProduct.product_category,
+            seller_id: this.newProduct.seller_id,
+            expiry_date: this.newProduct.expiry_date,
+            image: this.newProduct.image
+        }).then((Response) => {
+            if(Response == 200){
+                
+                this.messege = "Product Added Successfully"
+                console.log(Response);
+                // this.$router.push({name: 'Home'})
+            }else if(Response == 400){
+                this.messege = "Product Already Exists"
+                console.log(Response);
+            }
+        }).catch((error) =>{
+            console.log(error);
+        })
+
+        console.log(Response);
         this.resetForm();
       },
       handleImageUpload(event) {
