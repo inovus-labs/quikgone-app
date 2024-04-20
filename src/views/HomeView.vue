@@ -1,18 +1,20 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
 <template>
-  <main>
-    <section class="bg-gray-100 dark:bg-gray-900">
-            <div class="flex h-screen mx-auto w-screen p-4 items-center justify-center">
+  <Navbar/>   
 
-                <div class="w-full lg:w-1/3">
-                    <H1>hi hello</H1>
-                </div>
+  <ProductCard />
 
-            </div>
-        </section>
-
-  </main>
 </template>
+
+<script>
+import ProductCard from '@/components/ProductCard.vue'
+import Navbar from '@/components/reusable/NavBar.vue'
+
+export default{
+  name: 'HomeView',
+  components: {
+    ProductCard,
+    Navbar
+  }
+
+}
+</script>
