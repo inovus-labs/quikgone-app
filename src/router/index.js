@@ -32,7 +32,7 @@ const router = createRouter({
         title: 'signup',
       },
     },{
-      path: '/AddProject',
+      path: '/addProject',
       name: 'AddProject',
       component: AddProject,
       meta: {
@@ -40,7 +40,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/CartView',
+      path: '/cartview',
       name: 'CartView',
       component: CartView,
       meta: {
@@ -48,7 +48,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/Productpage',
+      path: '/productpage',
       name: 'Productpage',
       component: Productpage,
       meta: {
