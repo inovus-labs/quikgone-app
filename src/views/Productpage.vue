@@ -47,7 +47,7 @@
             </svg>
           </button>
         </div>
-        <div class="thumbnails flex justify-center mt-4">
+        <!-- <div class="thumbnails flex justify-center mt-4">
           <img
             v-for="(image, index) in product.images"
             :key="index"
@@ -56,7 +56,7 @@
             @click="updateMainImage(image)"
             class="w-16 h-16 object-cover rounded-md shadow-md mx-2 cursor-pointer"
           />
-        </div>
+        </div> -->
       </div>
       <div class="product-info">
         <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
@@ -90,7 +90,7 @@
         </div>
         <button
           @click="addToCart"
-          class="bg-indigo-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-indigo-700 transition-colors duration-300"
+          class="bg-primary text-white px-6 py-3 rounded-md shadow-md hover:bg-indigo-700 transition-colors duration-300"
         >
           Add to Cart
         </button>

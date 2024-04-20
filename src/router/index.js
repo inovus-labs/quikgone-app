@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import login from '@/views/Login.vue'
 import signup from '@/views/SignUp.vue'
 import Productpage from '@/views/Productpage.vue'
+import AddProject from '@/views/AddProject.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,13 @@ const router = createRouter({
       component: signup,
       meta: {
         title: 'signup',
+      },
+    },{
+      path: '/AddProject',
+      name: 'AddProject',
+      component: AddProject,
+      meta: {
+        title: 'AddProject',
       },
     },
     {
