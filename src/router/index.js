@@ -48,7 +48,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/productpage',
+      path: '/:product_id',
       name: 'Productpage',
       component: Productpage,
       meta: {
