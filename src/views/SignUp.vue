@@ -11,10 +11,10 @@
         <!-- Right Panel -->
         <div class="flex-1 md:w-1/3 bg-primary2 flex items-center justify-center pt-8 px-4 py-8 md:px-0">
             <div class="" >
-    <div class="w-full max-w-md mt-2 bg-bgSecondary border-8 border-bgSecondary rounded-xl pb-2 overflow-y-auto" style="max-height: 90vh; scrollbar-width: none;">
+    <div class="w-full max-w-md  bg-bgSecondary border-8 border-bgSecondary rounded-xl overflow-y-auto" style="max-height: 90vh; scrollbar-width: none;">
 
                 <!-- Form Content -->
-                <div class=" rounded-xl px-6 py-8">
+                <div class=" rounded-xl px-6 py-6">
                     <div class="flex mb-4">
                         <!-- First Name -->
                         <div class="w-1/2 mr-2">
