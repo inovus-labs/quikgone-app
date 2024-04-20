@@ -1,18 +1,20 @@
 <template>
-    <div class="flex flex-col md:flex-row ">
+    <div class="flex flex-col md:flex-row">
         <!-- Left Panel -->
-        <div class="bg-bgPrimary flex-1 flex items-center justify-center "> <!-- Hide logo in mobile view -->
+        <div class="bg-bgPrimary flex-1 flex items-center justify-center">
+            <!-- Hide logo in mobile view -->
             <div class="text-center text-white p-6">
                 <img src="../assets/logo/Logo.svg" alt="">
             </div>
         </div>
 
         <!-- Right Panel -->
-        <div
-            class="flex-1 md:w-1/3 bg-primary2 flex items-center justify-center pt-8 px-4 py-8 md:px-0 overflow-y-auto">
-            <div class="w-full max-w-md mt-2 bg-bgSecondary rounded-xl pb-2">
+        <div class="flex-1 md:w-1/3 bg-primary2 flex items-center justify-center pt-8 px-4 py-8 md:px-0">
+            <div class="" >
+    <div class="w-full max-w-md mt-2 bg-bgSecondary border-8 border-bgSecondary rounded-xl pb-2 overflow-y-auto" style="max-height: 90vh; scrollbar-width: none;">
+
                 <!-- Form Content -->
-                <div class="border rounded px-6 py-8">
+                <div class=" rounded-xl px-6 py-8">
                     <div class="flex mb-4">
                         <!-- First Name -->
                         <div class="w-1/2 mr-2">
@@ -84,7 +86,7 @@
                     <div class="mb-4 relative">
                         <label class="block text-gray-700 font-bold mb-2" for="password">Password</label>
                         <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             :type="showPassword ? 'text' : 'password'" id="password" placeholder="Enter your password"
                             v-model="password" required />
                         <button type="button"
@@ -166,6 +168,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -218,7 +221,8 @@ export default {
                 "password": this.password,
                 "dob": this.dob,
                 "gender": this.gender,
- 
+                "gst": this.gst,
+                "shopName": this.shopName
             }
 
             await userRegister(user).then((response) => {
@@ -253,7 +257,6 @@ export default {
         confirmPassword: function () {
             this.passwordMismatch = this.password !== this.confirmPassword;
         },
-
     },
 };
 </script>
