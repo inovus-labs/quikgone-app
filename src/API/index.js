@@ -24,3 +24,36 @@ export const userRegister = async (user) => {
     }
 
 }
+
+export const getitem = async () => {
+
+    let items = [
+        {
+            id: "1",
+            name: "Padavalam",
+            prize: "40",
+            discount:"20",
+            expdate:"23/04/2024",
+            delvdate:"22 March"
+        },
+        {
+            id: "2",
+            name: "Pavakka",
+            prize: "25",
+            discount:"10",
+            expdate:"23/04/2024",
+            delvdate:"22 March"
+        },
+        {
+            id: "3",
+            name: "Kovakaa",
+            prize: "20",
+            discount:"5",
+            expdate:"23/04/2024",
+            delvdate:"22 March"
+        },
+    ]
+
+    return items;
+
+}
