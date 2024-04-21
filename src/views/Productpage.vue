@@ -41,7 +41,7 @@
         <p class="product-price text-2xl font-semibold mb-4">{{ formatPrice(product.price) }}</p>
         <p class="product-description mb-6">{{ product.description }}</p>
         <div class="product-options mb-6">
-          <div v-for="(option, index) in product.options" :key="index" class="mb-4">
+          <!-- <div v-for="(option, index) in product.options" :key="index" class="mb-4">
             <label class="font-semibold">{{ option.label }}</label>
             <select v-model="selectedOptions[option.name]"
               class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
@@ -49,7 +49,7 @@
                 {{ value }}
               </option>
             </select>
-          </div>
+          </div> -->
         </div>
         <div class="product-quantity flex items-center mb-6">
           <label class="font-semibold mr-4">Quantity:</label>
@@ -114,14 +114,14 @@
           ],
           options: [
             {
-              name: 'size',
-              label: 'Size',
-              values: ['Small', 'Medium', 'Large'],
+              // name: 'size',
+              // label: 'Size',
+              // values: ['Small', 'Medium', 'Large'],
             },
             {
-              name: 'color',
-              label: 'Color',
-              values: ['Red', 'Blue', 'Green'],
+              // name: 'color',
+              // label: 'Color',
+              // values: ['Red', 'Blue', 'Green'],
             },
           ],
           specifications: [
@@ -129,11 +129,11 @@
             { label: 'Weight', value: '1 lb' },
             { label: 'Material', value: 'Plastic' },
           ],
-          reviews: [
-            { rating: 4, comment: 'Great product!' },
-            { rating: 3, comment: 'It\'s okay, could be better.' },
-            { rating: 5, comment: 'Highly recommended!' },
-          ],
+          // reviews: [
+          //   { rating: 4, comment: 'Great product!' },
+          //   { rating: 3, comment: 'It\'s okay, could be better.' },
+          //   { rating: 5, comment: 'Highly recommended!' },
+          // ],
         },
         selectedOptions: {
           size: 'Medium',
@@ -166,12 +166,12 @@
               this.product.price = data.product_qty; // Assuming product_qty is the price
               console.log(this.quantity);
               console.log(data);
-              
             }
             // Update other product properties as needed
           })
           .catch((error) => {
             console.log(this.id);
+            this.$router.push('/404') 
             console.log(error);
           });
       },
