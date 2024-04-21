@@ -53,18 +53,6 @@ export const AddItem = async (user) => {
 
 
 
-export const getitem = async (user) => {
-
-    try {
-        const res = await axios.get(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/products`, user);
-        console.log(res);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error;
-    }
-};
-
 export const GetCart = async (user) => {
     try {
       const cookies = document.cookie.split(';');
@@ -122,4 +110,15 @@ export const GetDataByID = async (product_id) => {
     return res
 
 }
+
+export const getitems = async () => {
+    try {
+        const res = await axios.get(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/products`);
+        // console.log(res);
+        return res;
+    } catch (error) {
+        return error;   
+    }
+
+};
 
