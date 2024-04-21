@@ -12,8 +12,8 @@
     </div> -->
     <div class="py-8 mx-auto max-w-screen-xl mt-8 lg:py-12 lg:px-6">
     <div class="grid gap-8 lg:gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-end">
-      <a href="/">
-        <template v-for="item in items" :key="items.id">
+      <a href="/"> 
+        <template v-for="item in items" :key="item.product_id">
           <ProductCard
                 :item="item" />
         </template>
@@ -27,7 +27,7 @@
 <script>
 import ProductCard from '@/components/ProductCard.vue'
 import Navbar from '@/components/reusable/NavBar.vue'
-import { getitem } from '@/API/index.js'
+import { getitems } from '@/API/index.js'
 
 export default{
   name: 'HomeView',
@@ -37,13 +37,13 @@ export default{
   },
   data(){
         return {
-            item: [],
+            items: [],
         }
     },
     async mounted() {
-        await getitem().then((items) => {
-            this.item = data.item;
-            console.log(items)
+        await getitems().then((res) => {
+            this.items = res.data;
+            // console.log(res.data)
         })
     }
 
