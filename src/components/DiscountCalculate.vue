@@ -37,8 +37,8 @@
                 id="mode"
                 v-model="discount.mode"
               >
-                <option value="%">%</option>
-                <option value="$">$</option>
+                <option value="percentage">%</option>
+                <option value="Rupess">$</option>
               </select>
             </div>
             <div class="flex items-center justify-end">
@@ -98,7 +98,9 @@
       },
       removeRow(index) {
         this.discounts.splice(index, 1);
-      },
+      },emitData() {
+      this.$emit('discounts-updated', this.discounts); // Emit the discounts data
+    },
     },
   };
   </script>

@@ -52,6 +52,7 @@
 import navbar from "@/components/reusable/NavBar.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Footer from "@/components/reusable/FooterView.vue";
+import { getitems } from "@/API/index.js";
 
 export default{
   name: "Home",

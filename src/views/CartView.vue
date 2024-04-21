@@ -77,6 +77,7 @@ export default {
   },
   data() {
     return {
+      productid: null,
       data: [],
       shippingCost: 4.99,
       taxRate: 0.06,
