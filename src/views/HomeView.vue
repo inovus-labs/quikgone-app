@@ -24,7 +24,7 @@
             <div class="mt-4 grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
               <template v-if="items">
-                <template v-for="item in items" :key="item.product_id">
+                <template v-for="item in items.slice(0,4)" :key="item.product_id">
                   
                   <div class="p-2">
                     <ProductCard :item="item" />
