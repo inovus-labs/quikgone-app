@@ -12,13 +12,15 @@
           <p class="mb-3 font-normal text-gray-700 text-primary2 dark:text-gray-400">
             <span class="text-border line-through"></span> 26% off
           </p>
-          <p class="mb-3 font-normal text-gray-700 text-gray dark:text-gray-400">Product expire by {{ item.expiry_date }}</p>
+          <p class="mb-3 font-normal text-gray-700 text-gray dark:text-gray-400">Product expire by {{ formattedExpiryDate }}</p>
         </div>
       </div>
     </a>
   </template>
   
   <script>
+  import { format } from 'date-fns';
+
   export default {
     name: 'ProductCard',
     props: {
@@ -26,6 +28,12 @@
         type: Object,
         required: true,
       }
+    },
+    computed: {
+    formattedExpiryDate() {
+      const expiryDate = new Date(this.item.expiry_date);
+      return format(expiryDate, 'MMMM d, yyyy');
+    },
     },
     // mounted() {
     //   console.log(this.item.product_name)

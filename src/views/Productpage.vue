@@ -55,12 +55,12 @@
         </div>
         <div class="product-info">
 
-          <template v-if="product?.name">
-            <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
-          </template>
+          <!-- <template v-if="product?.name"> -->
+            <!-- <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1> -->
+          <!-- </template> -->
           
-          <p class="product-price text-2xl font-semibold mb-4">{{ formatPrice(product.price) }}</p>
-          <p class="product-description mb-6">{{ product.description }}</p>
+          <!-- <p class="product-price text-2xl font-semibold mb-4">{{ formatPrice(product.price) }}</p> -->
+          <!-- <p class="product-description mb-6">{{ product.description }}</p> -->
           <div class="product-options mb-6">
             <!-- <div v-for="(option, index) in product.options" :key="index" class="mb-4">
               <label class="font-semibold">{{ option.label }}</label>
