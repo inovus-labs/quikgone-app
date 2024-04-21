@@ -60,12 +60,12 @@
                             <label class="inline-flex items-center">
                                 <input type="radio" class="form-radio text-primary border-primary" value="user"
                                     v-model="userType">
-                                <span class="ml-2">User</span>
+                                <span class="ml-2">Seller</span>
                             </label>
                             <label class="inline-flex items-center ml-6">
                                 <input type="radio" class="form-radio text-primary border-primary" value="client"
                                     v-model="userType">
-                                <span class="ml-2">Client</span>
+                                <span class="ml-2">Consumer</span>
                             </label>
                         </div> -->
 
