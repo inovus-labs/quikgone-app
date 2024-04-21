@@ -1,51 +1,46 @@
 <template>
-  <Navbar/>   
-<!--   
-  <div class="p-8 mx-auto max-w-screen-xl mt-9 lg:py-12 lg:px-6">
+  <Navbar />
+  <div class="py-8 mx-auto max-w-screen-xl mt-8 lg:py-12 lg:px-6">
     <div class="grid gap-8 lg:gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-end">
-        <template v-for="item in item" :key="item">
-            <ProductCard 
-               :item="item"
-            />
-        </template>
-    </div>
-    </div> -->
-    <div class="py-8 mx-auto max-w-screen-xl mt-8 lg:py-12 lg:px-6">
-    <div class="grid gap-8 lg:gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-end">
-      <a href="/"> 
+      <template v-if="items && items.length">
         <template v-for="item in items" :key="item.product_id">
-          <ProductCard
-                :item="item" />
+          <div class="p-2">
+            <ProductCard :item="item" />
+          </div>
         </template>
-      </a>
+      </template>
+      <div v-else>No products found.</div>
     </div>
-    </div>
-
-
+  </div>
+  <Footer />
 </template>
 
 <script>
 import ProductCard from '@/components/ProductCard.vue'
 import Navbar from '@/components/reusable/NavBar.vue'
 import { getitems } from '@/API/index.js'
+import Footer from '@/components/reusable/FooterView.vue'
 
-export default{
+export default {
   name: 'HomeView',
   components: {
     ProductCard,
-    Navbar
+    Navbar,
+    Footer
   },
-  data(){
-        return {
-            items: [],
-        }
-    },
-    async mounted() {
-        await getitems().then((res) => {
-            this.items = res.data;
-            // console.log(res.data)
-        })
+  data() {
+    return {
+      items: []
     }
-
+  },
+  async mounted() {
+    try {
+      const response = await getitems()
+      this.items = response.data.data
+      // console.log(response.data.data);
+    } catch (error) {
+      console.error('Error fetching items:', error)
+    }
+  }
 }
 </script>

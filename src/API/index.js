@@ -87,7 +87,7 @@ export const AddItem = async (user) => {
 export const getitems = async () => {
     try {
         const res = await axios.get(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/products`);
-        console.log(res);
+        // console.log(res);
         return res;
     } catch (error) {
         return error;   
