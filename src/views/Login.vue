@@ -7,7 +7,7 @@
                 <img src="/assets/logo.svg" alt="">
             </div>
         </div>
-    
+
         <!-- Content Section -->
         <div class=" flex justify-center bg-primary2 items-center md:w-1/3 md:flex-1">
             <div class="w-full  max-w-md px-4">
@@ -17,15 +17,22 @@
                         <label class="block text-gray-700 font-bold mb-2" for="email">
                             Email Address
                         </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email address" v-model="email" required />
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email" type="email" placeholder="Enter your email address" v-model="email" required />
                     </div>
                     <div class="mb-4 relative">
                         <label class="block text-gray-700 font-bold mb-2" for="password">
                             Password
                         </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10" :type="showPassword ? 'text' : 'password'" id="password" placeholder="Enter your password" v-model="password" required />
-                        <button type="button" class="absolute inset-y-0 right-0 mt-8 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none" @click="togglePasswordVisibility">
-                            
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                            :type="showPassword ? 'text' : 'password'" id="password" placeholder="Enter your password"
+                            v-model="password" required />
+                        <button type="button"
+                            class="absolute inset-y-0 right-0 mt-8 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none"
+                            @click="togglePasswordVisibility">
+
                             <template v-if="showPassword">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -46,94 +53,85 @@
                         </button>
                     </div>
                     <p v-if="wrongPassword" class="text-center text-red-500 text-sm">The password is wrong</p>
-                    <p v-if="HaveID" class="text-center text-red-500 text-sm">There is something wrong in your input!</p>
+                    <p v-if="HaveID" class="text-center text-red-500 text-sm">There is something wrong in your input!
+                    </p>
                     <div class="flex items-center justify-between">
-                        <button @click="userLog" class="bg-primary hover:bg-primary2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
+                        <button @click="userLog"
+                            class="bg-primary hover:bg-primary2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                            type="submit">
                             Login
                         </button>
-    
+
                     </div>
-                    <button @click="signupPage" class="ml-40 pl-2 pt-2 place-items-center  text-primary text-sm">SignUp</button>
+                    <button @click="signupPage"
+                        class="ml-40 pl-2 pt-2 place-items-center  text-primary text-sm">SignUp</button>
                 </form>
             </div>
         </div>
     </div>
-    </template>
-    
-    <script>
-    import {
-        userLogin
-    } from '@/API/index.js'
-    
-    export default {
-        name: 'login',
-        data() {
-            return {
-                email: '',
-                password: '',
-                showPassword: false,
-                HaveID: false,
-                wrongPassword: false,
-            };
+</template>
+
+<script>
+import { userLogin } from '@/API/index.js'
+
+export default {
+    name: 'login',
+    data() {
+        return {
+            email: '',
+            password: '',
+            showPassword: false,
+            HaveID: false,
+            wrongPassword: false,
+        };
+    },
+    methods: {
+        handleLogin() {
+            // Handle login logic here
+            console.log('Email:', this.email);
+            console.log('Password:', this.password);
         },
-        methods: {
-            handleLogin() {
-                // Handle login logic here
-                console.log('Email:', this.email);
-                console.log('Password:', this.password);
-            },
-            togglePasswordVisibility() {
-                this.showPassword = !this.showPassword;
-                const passwordInput = document.getElementById('password');
-                passwordInput.type = this.showPassword ? 'text' : 'password';
-            },
-            signupPage() {
-                this.$router.push({
-                    path: '/signup'
-                });
-            },
-            async userLog() {
-                let user = {
-                    "email": this.email,
-                    "password": this.password,
-                }
-    
-                let response = await userLogin(user);
-                console.log(response);
-    
-                if (response.status == 200) {
-                    document.cookie = "token=" + response.token;
-                    // Function to get the cookie value by name
-                    function getCookie(name) {
-                        const value = `; ${document.cookie}`;
-                        const parts = value.split(`; ${name}=`);
-                        if (parts.length === 2) return parts.pop().split(';').shift();
-                    }
-                    // Retrieve the token from the cookie
-                    const token = getCookie('token');
-    
-                    // Log the token to the console
-                    console.log(token);
-    
-                    window.location.href = "/";
-                } else if (response.response.status === 401) {
-                    this.wrongPassword = true;
-                    console.log("401 - wrong pass");
-                } else {
-                    console.log("error");
-                    this.HaveID = true;
-                }
-            },
-        }
-    };
-    </script>
-    
-    <style scoped>
-    @media (max-width: 768px) {
-        .flex-col {
-            flex-direction: column;
-            padding-top: 200px;
-        }
+        togglePasswordVisibility() {
+            this.showPassword = !this.showPassword;
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = this.showPassword ? 'text' : 'password';
+        },
+        signupPage() {
+            this.$router.push({
+                path: '/signup'
+            });
+        },
+        async userLog() {
+            let user = {
+                "email": this.email,
+                "password": this.password,
+            }
+
+            let response = await userLogin(user);
+            console.log(response);
+
+            if (response.status == 200) {
+                
+                document.cookie = "token=" + response.token;
+                window.location.href = "/";
+                
+            } else if (response.response.status === 401) {
+                this.wrongPassword = true;
+                console.log("401 - wrong pass");
+            } else {
+                console.log("error");
+                this.HaveID = true;
+            }
+        },
     }
-    </style>
-    
+};
+</script>
+
+<style scoped>
+@media (max-width: 768px) {
+    .flex-col {
+        flex-direction: column;
+        padding-top: 200px;
+    }
+}
+</style>

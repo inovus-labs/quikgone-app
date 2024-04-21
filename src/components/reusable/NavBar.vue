@@ -14,13 +14,15 @@
                                 aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="/signup"
-                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">signup</a>
+                            <a href="/login"
+                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Sign In</a>
                         </li>
-                        <li>
-                            <a href="/cartview"
-                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Cart</a>
-                        </li>
+                        <template v-if="isAuthenticated">
+                            <li>
+                                <a href="/cartview"
+                                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Cart</a>
+                            </li>
+                        </template>
                     </ul>
                 <!-- <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
                     aria-expanded="false"
@@ -95,6 +97,14 @@
 <script>
 export default {
     name: 'Navbar',
+    data() {
+        return {
+            isAuthenticated: false,
+        };
+    },
+    mounted() {
+        this.isAuthenticated = localStorage.getItem('token') ? true : false;
+    },
 
 }
 </script>

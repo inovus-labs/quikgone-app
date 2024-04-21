@@ -52,9 +52,11 @@
                         <span v-if="verifyEmail" class="text-red-500 text-sm">Your email does not look right</span>
                     </div>
 
+
+
                     <div class="mb-4">
                         <label class="block text-gray-700 font-bold mb-2" for="user-type">User Type</label>
-                        <div>
+                        <!-- <div>
                             <label class="inline-flex items-center">
                                 <input type="radio" class="form-radio text-primary border-primary" value="user"
                                     v-model="userType">
@@ -65,7 +67,18 @@
                                     v-model="userType">
                                 <span class="ml-2">Client</span>
                             </label>
-                        </div>
+                        </div> -->
+
+                        <template v-for="type in userTypes" :key="type.value">
+                            <div class="flex">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio text-primary border-primary" :value="type.value"
+                                        v-model="userType">
+                                    <span class="ml-2">{{ type.text }}</span>
+                                </label>
+                            </div>
+                        </template>
+                        
                     </div>
 
                     <!-- <div v-if="userType === 'user'">
@@ -194,8 +207,13 @@ export default {
             verifyPassword: null,
             passwordMismatch: null,
             error: null,
-            userType: 'user', // Default user type
-            gst: '',
+            userType: 'buyer',
+            userTypes: [
+                { text: 'Buyer', value: 'buyer' },
+                { text: 'Seller', value: 'seller' },
+                { text: 'Carrier', value: 'carrier' }
+            ],
+            // gst: '',
             shopName: '',
 
             genderOptions: [

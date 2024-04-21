@@ -50,7 +50,7 @@
 <script>
 import ProductCard from '@/components/ProductCard.vue'
 import Navbar from '@/components/reusable/NavBar.vue'
-import { getitems } from '@/API/index.js'
+import { getitems, getMyDetails } from '@/API/index.js'
 import Footer from '@/components/reusable/FooterView.vue'
 
 export default {
@@ -70,8 +70,17 @@ export default {
       const response = await getitems()
       this.items = response.data.data
       // console.log(response.data.data);
+      this.getUserDetail();
     } catch (error) {
       console.error('Error fetching items:', error)
+    }
+  },
+  methods: {
+    async getUserDetail() {
+      await getMyDetails().then((response) => {
+          console.log(response);
+          localStorage.setItem('user', JSON.stringify(response.data));
+      });
     }
   }
 }
