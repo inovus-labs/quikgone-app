@@ -103,16 +103,12 @@ export const getitems = async () => {
 
 };
 
-// Update Cart (PATCH)
-// http://localhost:3000/api/v1/cart/bPe6DiRZqZRm0B5zKqPFp
-
-// {
-//   "qty": 5
-// }
 
 
-export const AddItem = async (user) => {
+
+export const getMyDetails = async () => {
     try {
+
         const cookies = document.cookie.split(';');
         const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
         if (!tokenCookie) {
@@ -120,7 +116,9 @@ export const AddItem = async (user) => {
         }
         const token = tokenCookie.split('=')[1];
 
-        const res = await axios.post(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/products/create`, user, {
+
+        const res = await axios.get(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/users/me`, {
+
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -156,6 +154,7 @@ export const UpdateCartQty = async (cartId, updatedQty) => {
         return response;
     } catch (error) {
         console.log(error);
+
         return error;
     }
 };
