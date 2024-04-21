@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+
 export const userLogin = async (user) => {
 
     try {
@@ -122,16 +124,17 @@ export const getitems = async () => {
     }
 
 };
-export const Cgqty = async () => {
-    try {
-        const res = await axios.get(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/products`);
-        // console.log(res);
-        return res;
-    } catch (error) {
-        return error;   
-    }
-
-};
+// export const UpdateCartQty = async (cartId, updatedQty) => {
+//     try {
+//       const response = await axios.patch(
+//         `${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/cart/${cartId}`,
+//         { qty: updatedQty }
+//       );
+//       return response;
+//     } catch (error) {
+//       return error;
+//     }
+//   };
 
 // Update Cart (PATCH)
 // http://localhost:3000/api/v1/cart/bPe6DiRZqZRm0B5zKqPFp
@@ -139,3 +142,28 @@ export const Cgqty = async () => {
 // {
 //   "qty": 5
 // }
+
+export const UpdateCartQty = async (cartId, updatedQty) => {
+    try {
+        const cookies = document.cookie.split(';');
+        const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
+        if (!tokenCookie) {
+            throw new Error('No token found in cookie');
+        }
+        const token = tokenCookie.split('=')[1];
+
+        const response = await axios.patch(
+            `${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/cart/${cartId}`,
+            { qty: updatedQty },
+           {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};

@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="max-w-5xl mx-auto py-10">
     <div class="bg-white border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col md:flex-row md:justify-between">
       <div class="w-full md:w-2/3 mb-6 md:mb-0 flex flex-col">
@@ -61,12 +62,19 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
-import { GetCart } from '@/API/index.js';
+import { GetCart, UpdateCartQty } from '@/API/index.js';
+import Navbar from '@/components/reusable/NavBar.vue'
+import Footer from '@/components/reusable/FooterView.vue'
 
 export default {
+  components: {
+    Navbar,
+    Footer
+  },
   data() {
     return {
       data: [],
@@ -90,8 +98,7 @@ export default {
     discount() {
       return this.data.reduce(
         (total, item) => total + item.discount.reduce(
-          (discountTotal, discountItem) =>
-            discountTotal + (discountItem.min_qty <= item.qty ? item.price * discountItem.discount : 0),
+          (discountTotal, discountItem) => discountTotal + (discountItem.min_qty <= item.qty ? item.price * discountItem.discount : 0),
           0
         ),
         0
@@ -100,6 +107,19 @@ export default {
   },
   async mounted() {
     await this.Getdata();
+
+    // Added code
+    const cartId = 'bPe6DiRZqZRm0B5zKqPFp';
+    const newQuantity = 5;
+    UpdateCartQty(cartId, newQuantity)
+      .then(response => {
+        // Handle successful response
+        console.log(response);
+      })
+      .catch(error => {
+        // Handle error
+        console.error(error);
+      });
   },
   methods: {
     async Getdata() {
@@ -112,7 +132,6 @@ export default {
           console.log(error);
         });
     },
-
     incrementQuantity(item) {
       item.qty++;
     },

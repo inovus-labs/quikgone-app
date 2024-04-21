@@ -27,8 +27,8 @@
         required: true,
       }
     },
-    mounted() {
-      console.log(item.product_name)
-    }
+    // mounted() {
+    //   console.log(this.item.product_name)
+    // }
   }
   </script>

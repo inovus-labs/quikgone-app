@@ -1,35 +1,56 @@
-  <template>
-    <div class="max-w-7xl mx-auto py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="product-images">
-          <div class="relative">
-            <img :src="product.mainImage" alt="Main Product Image" class="w-full object-cover rounded-lg shadow-lg" />
-            <button
-              class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
-              @click="prevImage">
-              <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-              </svg>
-            </button>
-            <button
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
-              @click="nextImage">
-              <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </button>
-          </div>
-          <!-- <div class="thumbnails flex justify-center mt-4">
-            <img
-              v-for="(image, index) in product.images"
-              :key="index"
-              :src="image"
-              alt="Thumbnail"
-              @click="updateMainImage(image)"
-              class="w-16 h-16 object-cover rounded-md shadow-md mx-2 cursor-pointer"
-            />
+
+<template>
+  <Navbar />
+  <div class="max-w-7xl mx-auto py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="product-images">
+        <div class="relative">
+          <img :src="product.mainImage" alt="Main Product Image" class="w-full object-cover rounded-lg shadow-lg" />
+          <button
+            class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
+            @click="prevImage">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
+            @click="nextImage">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+        <!-- <div class="thumbnails flex justify-center mt-4">
+          <img
+            v-for="(image, index) in product.images"
+            :key="index"
+            :src="image"
+            alt="Thumbnail"
+            @click="updateMainImage(image)"
+            class="w-16 h-16 object-cover rounded-md shadow-md mx-2 cursor-pointer"
+          />
+        </div> -->
+      </div>
+      <div class="product-info">
+
+        <template v-if="product?.name">
+          <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
+        </template>
+        
+        <p class="product-price text-2xl font-semibold mb-4">{{ formatPrice(product.price) }}</p>
+        <p class="product-description mb-6">{{ product.description }}</p>
+        <div class="product-options mb-6">
+          <!-- <div v-for="(option, index) in product.options" :key="index" class="mb-4">
+            <label class="font-semibold">{{ option.label }}</label>
+            <select v-model="selectedOptions[option.name]"
+              class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+              <option v-for="(value, optionIndex) in option.values" :key="optionIndex" :value="value">
+                {{ value }}
+              </option>
+            </select>
           </div> -->
         </div>
         <div class="product-info">
@@ -92,12 +113,22 @@
         </div>
       </div>
     </div>
-  </template>
+  </div>
+  <Footer />
+</template>
 
 <script>
-import { GetDataByID, AddtoCart } from '@/API/index.js';
+  import { GetDataByID , AddtoCart } from '@/API/index.js';
+  import Navbar from '@/components/reusable/NavBar.vue'
+  import Footer from '@/components/reusable/FooterView.vue'
+
+
 
   export default {
+    components:{
+      Navbar,
+      Footer
+    },
     data() {
       return {
         messege: null,
