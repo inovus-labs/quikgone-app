@@ -9,44 +9,49 @@
                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
         
-    <div>
-      <label for="product_qty" class="block mb-2 font-semibold text-gray-700">Product Quantity</label>
-      <input type="number" id="product_qty" v-model="newProduct.product_qty" required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-    <div>
-      <label for="product_category" class="block mb-2 font-semibold text-gray-700">Product Category</label>
-      <input type="text" id="product_category" v-model="newProduct.product_category" required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-    <div class="md:col-span-3">
-      <label for="description" class="block mb-2 font-semibold text-gray-700">Product Description</label>
-      <textarea id="description" v-model="newProduct.description" rows="3" required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-    </div>
-    <div class="w-full md:col-span-1">
-      <label for="price" class="block mb-2 font-semibold text-gray-700">Product Price</label>
-      <div class="relative">
-        <input type="number" id="price" v-model="newProduct.price" required
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <span class="absolute right-2 top-2 text-gray-500">₹</span>
-      </div>
-    </div>
-    <div class="w-full md:col-span-1">
-      <label for="expiry_date" class="block mb-2 font-semibold text-gray-700">Expiry Date</label>
-      <input type="date" id="expiry_date" v-model="newProduct.expiry_date" required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-    <div class="md:col-span-3">
-      <label for="image" class="block mb-2 font-semibold text-gray-700">Product Image</label>
-      <input type="file" id="image" @change="handleImageUpload"
-        class="pr-14 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-    <div class="md:col-span-3 flex items-center justify-between">
-      <div class="w-1/2">
-        <DiscountCalculate />
-      </div>
-    </div>
+        <div>
+          <label for="product_qty" class="block mb-2 font-semibold text-gray-700">Product Quantity</label>
+          <input type="number" id="product_qty" v-model="newProduct.product_qty" required
+                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label for="product_unit" class="block mb-2 font-semibold text-gray-700">Product Unit</label>
+          <input type="text" id="product_unit" v-model="newProduct.product_unit" required
+                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label for="product_category" class="block mb-2 font-semibold text-gray-700">Product Category</label>
+          <input type="text" id="product_category" v-model="newProduct.product_category" required
+                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="md:col-span-3">
+          <label for="description" class="block mb-2 font-semibold text-gray-700">Product Description</label>
+          <textarea id="description" v-model="newProduct.product_desc" rows="3" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+
+        <div class="w-full md:col-span-1">
+          <label for="price" class="block mb-2 font-semibold text-gray-700">Product Price</label>
+          <div class="relative">
+            <input type="number" id="price" v-model="newProduct.price" required
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <span class="absolute right-2 top-2 text-gray-500">₹</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-3">
+          <label for="image" class="block mb-2 font-semibold text-gray-700">Product Image</label>
+          <input type="file" id="image" @change="handleImageUpload"
+                 class="pr-14 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="md:col-span-3">
+          <DiscountCalculate v-model="newProduct.discount" />
+        </div>
+
         <p v-if="message" class="text-center text-red-500 mb-4 text-sm">{{ message }}</p>
         <div class="md:col-span-3 flex justify-center">
           <button type="submit"
@@ -68,14 +73,13 @@ export default {
     return {
       newProduct: {
         product_name: '',
+        product_desc: '',
         product_qty: '',
-        product_owner: '',
+        product_unit: '',
         product_category: '',
-        seller_id: '',
-        expiry_date: '',
-        description: '',
         price: '',
-        image: null
+        images: [],
+        discount: []
       },
       message: null
     }
@@ -88,14 +92,13 @@ export default {
       try {
         const response = await AddItem({
           product_name: this.newProduct.product_name,
+          product_desc: this.newProduct.product_desc,
           product_qty: this.newProduct.product_qty,
-          product_owner: this.newProduct.product_owner,
+          product_unit: this.newProduct.product_unit,
           product_category: this.newProduct.product_category,
-          seller_id: this.newProduct.seller_id,
-          expiry_date: this.newProduct.expiry_date,
-          description: this.newProduct.description,
           price: this.newProduct.price,
-          image: this.newProduct.image
+          images: this.newProduct.images,
+          discount: this.newProduct.discount
         });
 
         if (response.status === 200) {
@@ -110,10 +113,8 @@ export default {
       }
     },
     handleImageUpload(event) {
-      this.newProduct.image = event.target.files[0];
+      this.newProduct.images = Array.from(event.target.files);
     }
   }
 }
 </script>
-  
-    
