@@ -81,23 +81,24 @@
                         
                     </div>
 
-                    <!-- <div v-if="userType === 'user'">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-bold mb-2" for="gst">GST Number</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="gst" type="text" placeholder="Enter your GST number" v-model="gst" />
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-bold mb-2" for="shop-name">Shop Name</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="shop-name" type="text" placeholder="Enter your shop name" v-model="shopName" />
-                        </div>
-                    </div> -->
+                    //  <div v-if="userType === 'user'">
+                    //     <div class="mb-4">
+                    //         <label class="block text-gray-700 font-bold mb-2" for="gst">GST Number</label>
+                    //         <input
+                    //             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    //             id="gst" type="text" placeholder="Enter your GST number" v-model="gst" />
+                    //     </div>
+                    //     <div class="mb-4">
+                    //         <label class="block text-gray-700 font-bold mb-2" for="shop-name">Shop Name</label>
+                    //         <input
+                    //             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    //             id="shop-name" type="text" placeholder="Enter your shop name" v-model="shopName" />
+                    //     </div>
+                    // </div> 
 
-                    <div class="mb-4 relative">
-                        <label class="block text-gray-700 font-bold mb-2" for="password">Password</label>
+                    <div class=
+                    'mb-4 relative'>
+                        <label class='block text-gray-700 font-bold mb-2' for="password">Password</label>
                         <input
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             :type="showPassword ? 'text' : 'password'" id="password" placeholder="Enter your password"

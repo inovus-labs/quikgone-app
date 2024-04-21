@@ -4,7 +4,7 @@
         <div class="bg-bgprimary text-white md:w-1/3 md:flex-1 flex items-center justify-center">
             <div>
                 //<h2 class="pt-5 text-3xl md:text-4xl font-bold mb-4 text-center">Welcome</h2>
-                <img src="@/assets/logo/logo.svg" alt="">
+                <img src="@/assets/logo.svg" alt="">
             </div>
         </div>
 
