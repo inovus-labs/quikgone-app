@@ -1,10 +1,10 @@
 <template>
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:flex-row h-screen">
         <!-- Left Panel -->
         <div class="bg-bgPrimary flex-1 flex items-center justify-center">
             <!-- Hide logo in mobile view -->
             <div class="text-center text-white p-6">
-                <img src="../assets/logo/Logo.svg" alt="">
+                <img src="/assets/logo.svg" alt="">
             </div>
         </div>
 
@@ -52,9 +52,11 @@
                         <span v-if="verifyEmail" class="text-red-500 text-sm">Your email does not look right</span>
                     </div>
 
+
+
                     <div class="mb-4">
                         <label class="block text-gray-700 font-bold mb-2" for="user-type">User Type</label>
-                        <div>
+                        <!-- <div>
                             <label class="inline-flex items-center">
                                 <input type="radio" class="form-radio text-primary border-primary" value="user"
                                     v-model="userType">
@@ -65,10 +67,21 @@
                                     v-model="userType">
                                 <span class="ml-2">Consumer</span>
                             </label>
-                        </div>
+                        </div> -->
+
+                        <template v-for="type in userTypes" :key="type.value">
+                            <div class="flex">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio text-primary border-primary" :value="type.value"
+                                        v-model="userType">
+                                    <span class="ml-2">{{ type.text }}</span>
+                                </label>
+                            </div>
+                        </template>
+                        
                     </div>
 
-                    <div v-if="userType === 'user'">
+                    <!-- <div v-if="userType === 'user'">
                         <div class="mb-4">
                             <label class="block text-gray-700 font-bold mb-2" for="gst">GST Number</label>
                             <input
@@ -81,7 +94,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="shop-name" type="text" placeholder="Enter your shop name" v-model="shopName" />
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="mb-4 relative">
                         <label class="block text-gray-700 font-bold mb-2" for="password">Password</label>
@@ -194,8 +207,13 @@ export default {
             verifyPassword: null,
             passwordMismatch: null,
             error: null,
-            userType: 'user', // Default user type
-            gst: '',
+            userType: 'buyer',
+            userTypes: [
+                { text: 'Buyer', value: 'buyer' },
+                { text: 'Seller', value: 'seller' },
+                { text: 'Carrier', value: 'carrier' }
+            ],
+            // gst: '',
             shopName: '',
 
             genderOptions: [

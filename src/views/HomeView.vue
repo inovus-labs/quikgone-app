@@ -1,5 +1,6 @@
 <template>
-  <Navbar />
+
+  <navbar />
   <div class="min-h-screen bg-gray-100">
 
     <main>
@@ -69,19 +70,21 @@
 
 <Footer />
 
-</template>
 
+</template>
 <script>
+
 import ProductCard from '@/components/ProductCard.vue'
 import Navbar from '@/components/reusable/NavBar.vue'
-import { getitems } from '@/API/index.js'
+import { getitems, getMyDetails } from '@/API/index.js'
 import Footer from '@/components/reusable/FooterView.vue'
 
-export default {
-  name: 'HomeView',
+
+export default{
+  name: "Home",
   components: {
     ProductCard,
-    Navbar,
+    navbar,
     Footer
   },
   data() {
@@ -94,10 +97,20 @@ export default {
       const response = await getitems()
       this.items = response.data.data
       // console.log(response.data.data);
+      this.getUserDetail();
     } catch (error) {
       console.error('Error fetching items:', error)
+    }
+  },
+  methods: {
+    async getUserDetail() {
+      await getMyDetails().then((response) => {
+          console.log(response);
+          localStorage.setItem('user', JSON.stringify(response.data));
+      });
     }
   }
 }
 
 </script>
+

@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import login from '@/views/Login.vue'
 import signup from '@/views/SignUp.vue'
 import Productpage from '@/views/Productpage.vue'
-import AddProject from '@/views/AddProject.vue'
+import AddProduct from '@/views/AddProduct.vue'
 import CartView from '@/views/CartView.vue'
 import Dashboard from '@/views/dashboard.vue'
 import err from '@/views/404.vue'
@@ -15,7 +15,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: 'Home',
+      },
     },
     {
       path: '/about',
@@ -26,21 +29,23 @@ const router = createRouter({
       name: 'login',
       component: login,
       meta: {
-        title: 'login',
+        title: 'Login',
       },
-    },{
+    },
+    {
       path: '/signup',
       name: 'signup',
       component: signup,
       meta: {
-        title: 'signup',
+        title: 'Signup',
       },
-    },{
-      path: '/addProject',
-      name: 'AddProject',
-      component: AddProject,
+    },
+    {
+      path: '/add-product',
+      name: 'AddProduct',
+      component: AddProduct,
       meta: {
-        title: 'AddProject',
+        title: 'Add Product',
       },
     },
     {
@@ -48,7 +53,7 @@ const router = createRouter({
       name: 'CartView',
       component: CartView,
       meta: {
-        title: 'CartView',
+        title: 'Cart',
       },
     },
     {
@@ -64,7 +69,7 @@ const router = createRouter({
       name: 'Productpage',
       component: Productpage,
       meta: {
-        title: 'Productpage',
+        title: 'Product',
       },
     },
     {
@@ -75,5 +80,11 @@ const router = createRouter({
     },
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} - QuikGone`
+  next()
+});
 
 export default router
