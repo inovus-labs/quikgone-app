@@ -1,6 +1,6 @@
 <template>
 
-  <navbar />
+  <Navbar />
   <div class="min-h-screen bg-gray-100">
 
     <main>
@@ -84,7 +84,7 @@ export default{
   name: "Home",
   components: {
     ProductCard,
-    navbar,
+    Navbar,
     Footer
   },
   data() {
