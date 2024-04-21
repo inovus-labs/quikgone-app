@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="flex justify-center items-center min-h-screen bg-primary2">
     <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-6xl">
       <h2 class="text-3xl font-bold mb-8 text-center text-primary">Add New Product</h2>
@@ -57,11 +58,16 @@
       </form>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import { AddItem } from '@/API/index.js'
 import DiscountCalculate from '@/components/DiscountCalculate.vue'
+import Navbar from '@/components/reusable/NavBar.vue'
+import Footer from '@/components/reusable/FooterView.vue'
+
+
 
 export default {
   data() {
@@ -81,7 +87,9 @@ export default {
     }
   },
   components: {
-    DiscountCalculate
+    DiscountCalculate,
+    Navbar,
+    Footer
   },
   methods: {
     async addProduct() {

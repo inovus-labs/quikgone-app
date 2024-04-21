@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="max-w-7xl mx-auto py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="product-images">
@@ -92,13 +93,20 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
   import { GetDataByID , AddtoCart } from '@/API/index.js';
+  import Navbar from '@/components/reusable/NavBar.vue'
+  import Footer from '@/components/reusable/FooterView.vue'
 
 
   export default {
+    components:{
+      Navbar,
+      Footer
+    },
     data() {
       return {
         messege: null,

@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="max-w-5xl mx-auto py-10">
     <div class="bg-white border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col md:flex-row md:justify-between">
       <div class="w-full md:w-2/3 mb-6 md:mb-0 flex flex-col">
@@ -61,12 +62,21 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import { GetCart } from '@/API/index.js';
+import Navbar from '@/components/reusable/NavBar.vue'
+import Footer from '@/components/reusable/FooterView.vue'
+
+
 
 export default {
+  components:{
+    Navbar,
+    Footer
+  },
   data() {
     return {
       data: [],
