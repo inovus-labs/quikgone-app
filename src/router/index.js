@@ -3,8 +3,13 @@ import HomeView from '../views/HomeView.vue'
 import login from '@/views/Login.vue'
 import signup from '@/views/SignUp.vue'
 import Productpage from '@/views/Productpage.vue'
-import AddProject from '@/views/AddProject.vue'
+import AddProduct from '@/views/AddProduct.vue'
 import CartView from '@/views/CartView.vue'
+import Dashboard from '@/views/dashboard.vue'
+import Users from '@/views/users.vue'
+import Orders from '@/views/orders.vue'
+import err from '@/views/404.vue'
+import AboutView from '@/views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,31 +17,37 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: 'Home',
+      },
     },
     {
       path: '/about',
       name: 'about',
+      component: AboutView
     },{
       path: '/login',
       name: 'login',
       component: login,
       meta: {
-        title: 'login',
+        title: 'Login',
       },
-    },{
+    },
+    {
       path: '/signup',
       name: 'signup',
       component: signup,
       meta: {
-        title: 'signup',
+        title: 'Signup',
       },
-    },{
-      path: '/addProject',
-      name: 'AddProject',
-      component: AddProject,
+    },
+    {
+      path: '/add-product',
+      name: 'AddProduct',
+      component: AddProduct,
       meta: {
-        title: 'AddProject',
+        title: 'Add Product',
       },
     },
     {
@@ -44,18 +55,58 @@ const router = createRouter({
       name: 'CartView',
       component: CartView,
       meta: {
-        title: 'CartView',
+        title: 'Cart',
+      },
+    },
+
+
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      meta: {
+        title: 'Dashboard',
       },
     },
     {
-      path: '/productpage',
+      path: '/users',
+      name: 'Users',
+      component: Users,
+      meta: {
+        title: 'Users',
+      },
+    },
+    {
+      path: '/orders',
+      name: 'Orders',
+      component: Orders,
+      meta: {
+        title: 'Orders',
+      },
+    },
+
+
+    {
+      path: '/:product_id',
       name: 'Productpage',
       component: Productpage,
       meta: {
-        title: 'Productpage',
+        title: 'Product',
       },
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: err,
+      meta: { title: '404' }
     },
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} - QuikGone`
+  next()
+});
 
 export default router
