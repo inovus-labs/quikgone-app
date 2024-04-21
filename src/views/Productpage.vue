@@ -193,7 +193,9 @@ export default {
             const data = response.data.data;
             console.log(data.product_name);
             this.product.name = data.product_name;
-            this.product.price = data.product_qty; // Assuming product_qty is the price
+            this.product.description = data.product_desc;
+            this.product.mainImage = data.images[0]
+            this.product.price = data.price; // Assuming product_qty is the price
             console.log(this.quantity);
             console.log(data);
           }
@@ -209,7 +211,7 @@ export default {
 
 
     formatPrice(price) {
-      return '$' + price;
+      return '₹ ' + price + '.00';
     },
 
     prevImage() {
