@@ -5,17 +5,17 @@
         <div class="bg-white border border-gray-300 rounded-lg p-6 flex-grow">
           <h2 class="text-lg font-bold mb-4">Cart Items</h2>
           <div class="divide-y divide-gray-200 flex flex-col flex-grow">
-            <div v-for="item in cartItems" :key="item.id" class="flex items-center py-4">
-              <img :src="item.image" alt="Product Image" class="w-20 h-20 rounded-md object-cover mr-4" />
+            <div v-for="item in data" :key="item._id" class="flex items-center py-4">
+              <img :src="item.images[0]" alt="Product Image" class="w-20 h-20 rounded-md object-cover mr-4" />
               <div class="flex-grow">
-                <h3 class="text-lg font-semibold">{{ item.name }}</h3>
+                <h3 class="text-lg font-semibold">{{ item.product_name }}</h3>
                 <p>₹{{ item.price }}</p>
                 <div class="flex items-center mt-2">
                   <button @click="decrementQuantity(item)"
                     class="border border-gray-300 font-bold py-1 px-2 rounded-l focus:outline-none hover:bg-gray-200">
                     -
                   </button>
-                  <input type="text" v-model="item.quantity"
+                  <input type="text" v-model="item.qty"
                     class="w-12 text-center border-t border-b border-gray-300 focus:outline-none" readonly />
                   <button @click="incrementQuantity(item)"
                     class="border border-gray-300 font-bold py-1 px-2 rounded-r focus:outline-none hover:bg-gray-200">
@@ -66,88 +66,69 @@
 <script>
 import { GetCart } from '@/API/index.js';
 
-  export default {
-    data() {
-      return {
-        cartItems: [
-          {
-            id: 1,
-            name: "Product Name 1",
-            price: 59.99,
-            image: "https://via.placeholder.com/100x100",
-            quantity: 1,
-            discount: 5.99, // Example discount for this product
-          },
-          {
-            id: 2,
-            name: "Product Name 2",
-            price: 79.99,
-            image: "https://via.placeholder.com/100x100",
-            quantity: 2,
-            discount: 0, // No discount for this product
-          },
-          {
-            id: 3,
-            name: "Product Name 3",
-            price: 49.99,
-            image: "https://via.placeholder.com/100x100",
-            quantity: 1,
-            discount: 2.49, // Example discount for this product
-          },
-        ],
-        shippingCost: 4.99,
-        taxRate: 0.06,
-      };
+export default {
+  data() {
+    return {
+      data: [],
+      shippingCost: 4.99,
+      taxRate: 0.06,
+    };
+  },
+  computed: {
+    subtotal() {
+      return this.data.reduce(
+        (total, item) => total + item.price * item.qty,
+        0
+      );
     },
-    computed: {
-      subtotal() {
-        return this.cartItems.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        );
-      },
-      tax() {
-        return this.subtotal * this.taxRate;
-      },
-      total() {
-        return this.subtotal + this.shippingCost + this.tax - this.discount;
-      },
-      discount() {
-        return this.cartItems.reduce(
-          (total, item) => total + item.discount * item.quantity,
-          0
-        );
-      },
-    },async mounted() {
-      await this.Getdata();
-      console.log("asas");
+    tax() {
+      return this.subtotal * this.taxRate;
     },
-    methods: {
-
-      async Getdata(){
-        await GetCart({}).then((response)=>{
-          console.log(response);
-        }).catch((error) =>{
-          console.log(error);
+    total() {
+      return this.subtotal + this.shippingCost + this.tax - this.discount;
+    },
+    discount() {
+      return this.data.reduce(
+        (total, item) => total + item.discount.reduce(
+          (discountTotal, discountItem) =>
+            discountTotal + (discountItem.min_qty <= item.qty ? item.price * discountItem.discount : 0),
+          0
+        ),
+        0
+      );
+    },
+  },
+  async mounted() {
+    await this.Getdata();
+  },
+  methods: {
+    async Getdata() {
+      await GetCart({})
+        .then((response) => {
+          this.data = response.cart;
+          console.log(this.data);
         })
-      },
-
-      incrementQuantity(item) {
-        item.quantity++;
-      },
-      decrementQuantity(item) {
-        if (item.quantity > 1) {
-          item.quantity--;
-        } else {
-          this.removeFromCart(item);
-        }
-      },
-      removeFromCart(item) {
-        this.cartItems = this.cartItems.filter((cartItem) => cartItem.id !== item.id);
-      },
-      buyNow() {
-        alert("Buy Now functionality not implemented yet");
-      },
+        .catch((error) => {
+          console.log(error);
+        });
     },
-  };
+
+    incrementQuantity(item) {
+      item.qty++;
+    },
+    decrementQuantity(item) {
+      if (item.qty > 1) {
+        item.qty--;
+      } else {
+        this.removeFromCart(item);
+      }
+    },
+    removeFromCart(item) {
+      this.data = this.data.filter((cartItem) => cartItem._id !== item._id);
+    },
+    buyNow() {
+      alert("Buy Now functionality not implemented yet");
+    },
+  },
+};
 </script>
