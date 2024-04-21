@@ -7,6 +7,7 @@ import AddProject from '@/views/AddProject.vue'
 import CartView from '@/views/CartView.vue'
 import Dashboard from '@/views/dashboard.vue'
 import err from '@/views/404.vue'
+import AboutView from '@/views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
+      component: AboutView
     },{
       path: '/login',
       name: 'login',
