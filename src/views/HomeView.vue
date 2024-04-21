@@ -39,7 +39,7 @@
           </div>
           <div class="mt-8 h-64 bg-primary2 rounded-xl	">
             <div>
-              <h1 class="text-center text-gary pt-6">Adverticment area</h1>
+              <h1 class="text-center text-gary pt-6">Advertisement area</h1>
             </div>
           </div>
 
