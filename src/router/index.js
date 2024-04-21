@@ -5,6 +5,8 @@ import signup from '@/views/SignUp.vue'
 import Productpage from '@/views/Productpage.vue'
 import AddProject from '@/views/AddProject.vue'
 import CartView from '@/views/CartView.vue'
+import Dashboard from '@/views/dashboard.vue'
+import err from '@/views/404.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,12 +50,26 @@ const router = createRouter({
       },
     },
     {
-      path: '/productpage',
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      meta: {
+        title: 'Dashboard',
+      },
+    },
+    {
+      path: '/:product_id',
       name: 'Productpage',
       component: Productpage,
       meta: {
         title: 'Productpage',
       },
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: err,
+      meta: { title: '404' }
     },
   ]
 })

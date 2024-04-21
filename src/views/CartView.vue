@@ -1,143 +1,134 @@
 <template>
-    <div class="max-w-7xl mx-auto py-10">
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Your Shopping Cart</h1>
-        <div class="flex flex-col md:flex-row md:justify-between">
-          <div class="w-full md:w-2/3 mb-6 md:mb-0">
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <h2 class="text-lg font-bold mb-4 text-gray-800">Cart Items</h2>
-              <div class="divide-y divide-gray-200">
-                <div
-                  v-for="item in cartItems"
-                  :key="item.id"
-                  class="flex items-center py-4"
-                >
-                  <img
-                    :src="item.image"
-                    alt="Product Image"
-                    class="w-20 h-20 rounded-md object-cover mr-4"
-                  />
-                  <div class="flex-grow">
-                    <h3 class="text-lg font-semibold text-gray-800">{{ item.name }}</h3>
-                    <p class="text-gray-600">${{ item.price }}</p>
-                    <div class="flex items-center mt-2">
-                      <button
-                        @click="decrementQuantity(item)"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1 px-2 rounded-l focus:outline-none"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        v-model="item.quantity"
-                        class="w-12 text-center bg-gray-200 focus:outline-none"
-                        readonly
-                      />
-                      <button
-                        @click="incrementQuantity(item)"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1 px-2 rounded-r focus:outline-none"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+  <div class="max-w-5xl mx-auto py-10">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col md:flex-row md:justify-between">
+      <div class="w-full md:w-2/3 mb-6 md:mb-0 flex flex-col">
+        <div class="bg-white border border-gray-300 rounded-lg p-6 flex-grow">
+          <h2 class="text-lg font-bold mb-4">Cart Items</h2>
+          <div class="divide-y divide-gray-200 flex flex-col flex-grow">
+            <div v-for="item in data" :key="item._id" class="flex items-center py-4">
+              <img :src="item.images[0]" alt="Product Image" class="w-20 h-20 rounded-md object-cover mr-4" />
+              <div class="flex-grow">
+                <h3 class="text-lg font-semibold">{{ item.product_name }}</h3>
+                <p>₹{{ item.price }}</p>
+                <div class="flex items-center mt-2">
+                  <button @click="decrementQuantity(item)"
+                    class="border border-gray-300 font-bold py-1 px-2 rounded-l focus:outline-none hover:bg-gray-200">
+                    -
+                  </button>
+                  <input type="text" v-model="item.qty"
+                    class="w-12 text-center border-t border-b border-gray-300 focus:outline-none" readonly />
+                  <button @click="incrementQuantity(item)"
+                    class="border border-gray-300 font-bold py-1 px-2 rounded-r focus:outline-none hover:bg-gray-200">
+                    +
+                  </button>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="w-full md:w-1/3">
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <h2 class="text-lg font-bold mb-4 text-gray-800">Order Summary</h2>
-              <div class="divide-y divide-gray-200">
-                <div class="flex justify-between py-2">
-                  <span class="text-gray-600">Subtotal</span>
-                  <span class="text-gray-800 font-semibold">${{ subtotal }}</span>
-                </div>
-                <div class="flex justify-between py-2">
-                  <span class="text-gray-600">Shipping</span>
-                  <span class="text-gray-800 font-semibold">${{ shippingCost }}</span>
-                </div>
-                <div class="flex justify-between py-2">
-                  <span class="text-gray-600">Tax</span>
-                  <span class="text-gray-800 font-semibold">${{ tax }}</span>
-                </div>
-                <div class="flex justify-between py-2 font-bold">
-                  <span class="text-gray-800">Total</span>
-                  <span class="text-gray-800">${{ total }}</span>
-                </div>
-              </div>
-              <button
-                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-md w-full mt-6 focus:outline-none"
-                @click="buyNow"
-              >
-                Buy Now
-              </button>
             </div>
           </div>
         </div>
       </div>
+      <div class="ml-4 w-full  flex flex-col">
+        <div class="bg-white border border-gray-300 rounded-lg p-6 flex-grow">
+          <h2 class="text-lg font-bold mb-4">Order Summary</h2>
+          <div class="divide-y divide-gray-200 flex flex-col flex-grow">
+            <div class="flex justify-between py-2">
+              <span>Subtotal</span>
+              <span>₹{{ subtotal }}</span>
+            </div>
+            <div class="flex justify-between py-2">
+              <span>Shipping</span>
+              <span>₹{{ shippingCost }}</span>
+            </div>
+            <div class="flex justify-between py-2">
+              <span>Tax</span>
+              <span>₹{{ tax }}</span>
+            </div>
+            <div class="flex justify-between py-2 font-bold">
+              <span>Total</span>
+              <span>₹{{ total }}</span>
+            </div>
+            <div class="flex justify-between py-2">
+              <span>Discount</span>
+              <span>-₹{{ discount }}</span>
+            </div>
+          </div>
+          <button
+            class="bg-primary text-white font-bold py-3 px-6 rounded-md w-full mt-6 focus:outline-none hover:bg-primary2 transition-colors duration-300"
+            @click="buyNow">
+            Buy Now
+          </button>
+        </div>
+      </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        cartItems: [
-          {
-            id: 1,
-            name: "Product Name 1",
-            price: 59.99,
-            image: "https://via.placeholder.com/100x100",
-            quantity: 1,
-          },
-          {
-            id: 2,
-            name: "Product Name 2",
-            price: 79.99,
-            image: "https://via.placeholder.com/100x100",
-            quantity: 2,
-          },
-          {
-            id: 2,
-            name: "Product Name 2",
-            price: 79.99,
-            image: "https://via.placeholder.com/100x100",
-            quantity: 2,
-          },
-          // Add more cart items here
-        ],
-        shippingCost: 4.99,
-        taxRate: 0.06, // 6% tax rate
-      };
+  </div>
+</template>
+
+<script>
+import { GetCart } from '@/API/index.js';
+
+export default {
+  data() {
+    return {
+      data: [],
+      shippingCost: 4.99,
+      taxRate: 0.06,
+    };
+  },
+  computed: {
+    subtotal() {
+      return this.data.reduce(
+        (total, item) => total + item.price * item.qty,
+        0
+      );
     },
-    computed: {
-      subtotal() {
-        return this.cartItems.reduce(
-          (total, item) => total + item.price * item.quantity,
+    tax() {
+      return this.subtotal * this.taxRate;
+    },
+    total() {
+      return this.subtotal + this.shippingCost + this.tax - this.discount;
+    },
+    discount() {
+      return this.data.reduce(
+        (total, item) => total + item.discount.reduce(
+          (discountTotal, discountItem) =>
+            discountTotal + (discountItem.min_qty <= item.qty ? item.price * discountItem.discount : 0),
           0
-        );
-      },
-      tax() {
-        return this.subtotal * this.taxRate;
-      },
-      total() {
-        return this.subtotal + this.shippingCost + this.tax;
-      },
+        ),
+        0
+      );
     },
-    methods: {
-      incrementQuantity(item) {
-        item.quantity++;
-      },
-      decrementQuantity(item) {
-        if (item.quantity > 1) {
-          item.quantity--;
-        }
-      },
-      buyNow() {
-        // Handle the "Buy Now" functionality here, e.g., redirect to a checkout page
-        alert("Buy Now functionality not implemented yet");
-      },
+  },
+  async mounted() {
+    await this.Getdata();
+  },
+  methods: {
+    async Getdata() {
+      await GetCart({})
+        .then((response) => {
+          this.data = response.cart;
+          console.log(this.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-  };
-  </script>
+
+    incrementQuantity(item) {
+      item.qty++;
+    },
+    decrementQuantity(item) {
+      if (item.qty > 1) {
+        item.qty--;
+      } else {
+        this.removeFromCart(item);
+      }
+    },
+    removeFromCart(item) {
+      this.data = this.data.filter((cartItem) => cartItem._id !== item._id);
+    },
+    buyNow() {
+      alert("Buy Now functionality not implemented yet");
+    },
+  },
+};
+</script>
