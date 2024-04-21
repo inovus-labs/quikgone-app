@@ -6,7 +6,7 @@
     
     <section class="bg-white">
       <div class="flex flex-col lg:flex-row w-full mx-auto max-w-screen-xl p-4 items-center justify-center lg:py-14">
-        <img src="/assets/Logo with name.svg" class="h-64" alt="Flowbite Logo" />
+        <img src="/assets/logo_name.svg" class="h-64" alt="Flowbite Logo" />
       </div>
     </section>
 
