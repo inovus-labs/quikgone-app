@@ -6,6 +6,8 @@ import Productpage from '@/views/Productpage.vue'
 import AddProduct from '@/views/AddProduct.vue'
 import CartView from '@/views/CartView.vue'
 import Dashboard from '@/views/dashboard.vue'
+import Users from '@/views/users.vue'
+import Orders from '@/views/orders.vue'
 import err from '@/views/404.vue'
 import AboutView from '@/views/AboutView.vue'
 
@@ -56,6 +58,8 @@ const router = createRouter({
         title: 'Cart',
       },
     },
+
+
     {
       path: '/dashboard',
       name: 'Dashboard',
@@ -64,6 +68,24 @@ const router = createRouter({
         title: 'Dashboard',
       },
     },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users,
+      meta: {
+        title: 'Users',
+      },
+    },
+    {
+      path: '/orders',
+      name: 'Orders',
+      component: Orders,
+      meta: {
+        title: 'Orders',
+      },
+    },
+
+
     {
       path: '/:product_id',
       name: 'Productpage',

@@ -1,7 +1,7 @@
 <!-- SidebarNav.vue -->
 <template>
   <div class="bg-gray-800 text-gray-100 flex flex-col w-64 p-4">
-    <div class="flex items-center justify-center h-20 mb-6">
+    <div class="flex items-center justify-left h-20 mb-6 ml-5">
       <h1 class="text-2xl font-bold">Admin Panel</h1>
     </div>
     <nav>
@@ -52,7 +52,7 @@
         </li>
         <li class="mb-2">
           <router-link
-            to="/products"
+            to="/add-product"
             class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"
           >
             <svg
@@ -146,5 +146,14 @@
 <script>
 export default {
   name: 'SidebarNav',
+  data() {
+    return {
+      isAuthenticated: false,
+      user: JSON.parse(localStorage.getItem('user')),
+    };
+  },
+  mounted() {
+    this.isAuthenticated = localStorage.getItem('user') ? true : false;
+  },
 }
 </script>
