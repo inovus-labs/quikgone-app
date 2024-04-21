@@ -67,7 +67,7 @@
   </template>
 
   <script>
-  import { AddItem } from '@/API/index.js'
+  import { getitems } from '@/API/index.js'
   import DiscountCalculate from '@/components/DiscountCalculate.vue'
   import Navbar from '@/components/reusable/NavBar.vue'
   import AppFooter from '@/components/reusable/FooterView.vue'
@@ -109,7 +109,7 @@
     methods: {
       async addProduct() {
         try {
-          const response = await AddItem({
+          const response = await getitems({
             product_name: this.newProduct.product_name,
             product_desc: this.newProduct.product_desc,
             product_qty: this.newProduct.product_qty,
