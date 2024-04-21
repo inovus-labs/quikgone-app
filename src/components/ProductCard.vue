@@ -10,7 +10,7 @@
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Rs.{{ item.price }}</h5>
     
           <p class="mb-3 font-normal text-gray-700 text-primary2 dark:text-gray-400">
-            <span class="text-border line-through"></span> {{item.discount.discount }}% off
+            <span class="text-border line-through"></span> 26% off
           </p>
           <p class="mb-3 font-normal text-gray-700 text-gray dark:text-gray-400">Product expire by {{ item.expiry_date }}</p>
         </div>

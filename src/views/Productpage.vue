@@ -97,6 +97,7 @@
 <script>
   import { GetDataByID , AddtoCart } from '@/API/index.js';
 
+
   export default {
     data() {
       return {
