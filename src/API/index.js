@@ -42,8 +42,9 @@ export const AddItem = async (user) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        console.log(res);
-        return res;
+        console.log(res.headers);
+        console.log(res.data);
+        return res.data;
     } catch (error) {
         console.log(error);
         return error;
