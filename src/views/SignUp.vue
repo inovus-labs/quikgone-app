@@ -1,10 +1,10 @@
 <template>
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:flex-row h-screen">
         <!-- Left Panel -->
         <div class="bg-bgPrimary flex-1 flex items-center justify-center">
             <!-- Hide logo in mobile view -->
             <div class="text-center text-white p-6">
-                <img src="../assets/logo/Logo.svg" alt="">
+                <img src="/assets/logo.svg" alt="">
             </div>
         </div>
 
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div v-if="userType === 'user'">
+                    <!-- <div v-if="userType === 'user'">
                         <div class="mb-4">
                             <label class="block text-gray-700 font-bold mb-2" for="gst">GST Number</label>
                             <input
@@ -81,7 +81,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="shop-name" type="text" placeholder="Enter your shop name" v-model="shopName" />
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="mb-4 relative">
                         <label class="block text-gray-700 font-bold mb-2" for="password">Password</label>
