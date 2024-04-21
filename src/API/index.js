@@ -122,4 +122,20 @@ export const getitems = async () => {
     }
 
 };
+export const Cgqty = async () => {
+    try {
+        const res = await axios.get(`${import.meta.env.VITE_APP_QUIKGONE_API_BASE_URL}/api/v1/products`);
+        // console.log(res);
+        return res;
+    } catch (error) {
+        return error;   
+    }
 
+};
+
+// Update Cart (PATCH)
+// http://localhost:3000/api/v1/cart/bPe6DiRZqZRm0B5zKqPFp
+
+// {
+//   "qty": 5
+// }
