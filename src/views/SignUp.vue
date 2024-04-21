@@ -4,7 +4,7 @@
         <div class="bg-bgPrimary flex-1 flex items-center justify-center">
             <!-- Hide logo in mobile view -->
             <div class="text-center text-white p-6">
-                <img src="@/assets/logo.svg" alt="">
+                <img src="@/assets/logo/Logo.svg" alt="">
             </div>
         </div>
 
